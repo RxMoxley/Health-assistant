@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Past Conversation</h2>
+  <div class="chat-window read-only">
+    {% for m in messages %}
+      <div class="msg {{ m.role }}">{{ m.content }}</div>
+    {% endfor %}
+  </div>
+  <p><a href="{{ url_for('history') }}">&larr; Back to history</a></p>
+</div>
+{% endblock %}
