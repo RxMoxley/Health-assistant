@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Conversation History</h2>
+  {% if conversations %}
+    <ul class="history-list">
+    {% for c in conversations %}
+      <li>
+        <a href="{{ url_for('view_conversation', conv_id=c.id) }}">
+          <strong>{{ c.started_at.strftime('%Y-%m-%d %H:%M') }}</strong>
+          — {{ c.first_msg[:80] if c.first_msg else '(empty)' }}{% if c.first_msg and c.first_msg|length > 80 %}…{% endif %}
+        </a>
+      </li>
+    {% endfor %}
+    </ul>
+  {% else %}
+    <p class="muted">No conversations yet.</p>
+  {% endif %}
+</div>
+{% endblock %}
