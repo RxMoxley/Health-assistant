@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card chat-card">
+  <div class="chat-header">
+    <h2>Health Assistant</h2>
+    <a href="{{ url_for('new_conversation') }}" class="btn small">New conversation</a>
+  </div>
+  <div id="chat-window" class="chat-window">
+    {% for m in messages %}
+      <div class="msg {{ m.role }}">{{ m.content }}</div>
+    {% endfor %}
+  </div>
+  <form id="chat-form" class="chat-input">
+    <textarea id="msg-input" rows="2" placeholder="Describe how you're feeling..."></textarea>
+    <button type="submit" class="btn primary">Send</button>
+  </form>
+  <p class="disclaimer">VitaAssist gives general health information only. It is not a substitute for professional medical advice.</p>
+</div>
+<script src="{{ url_for('static', filename='js/chat.js') }}"></script>
+{% endblock %}
