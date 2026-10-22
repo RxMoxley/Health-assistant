@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Administrator Panel</h2>
+  <table class="tbl">
+    <thead>
+      <tr><th>ID</th><th>Username</th><th>Email</th><th>Role</th><th>Registered</th><th>Conversations</th><th>Action</th></tr>
+    </thead>
+    <tbody>
+      {% for u in users %}
+      <tr>
+        <td>{{ u.id }}</td>
+        <td>{{ u.username }}</td>
+        <td>{{ u.email }}</td>
+        <td>{{ u.role }}</td>
+        <td>{{ u.created_at.strftime('%Y-%m-%d') }}</td>
+        <td>{{ u.conv_count }}</td>
+        <td>
+          {% if u.id != session.user_id %}
+          <form method="POST" action="{{ url_for('admin_delete', user_id=u.id) }}"
+                onsubmit="return confirm('Delete this user and all their data?');">
+            <button class="btn small danger">Delete</button>
+          </form>
+          {% else %}<span class="muted">—</span>{% endif %}
+        </td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
