@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block content %}
+<div class="card">
+  <h2>Health Profile</h2>
+  <p class="muted">This information personalizes every response from the assistant. Any field can be left blank.</p>
+  <form method="POST" class="grid">
+    <label>Age <input type="number" name="age" value="{{ profile.age or '' }}"></label>
+    <label>Gender <input type="text" name="gender" value="{{ profile.gender or '' }}"></label>
+    <label class="full">Known medical conditions
+      <textarea name="known_conditions" rows="2">{{ profile.known_conditions or '' }}</textarea></label>
+    <label class="full">Current medications
+      <textarea name="current_medications" rows="2">{{ profile.current_medications or '' }}</textarea></label>
+    <label class="full">Allergies
+      <textarea name="allergies" rows="2">{{ profile.allergies or '' }}</textarea></label>
+    <label class="full">Lifestyle factors (diet, exercise, smoking, sleep, etc.)
+      <textarea name="lifestyle_factors" rows="2">{{ profile.lifestyle_factors or '' }}</textarea></label>
+    <button type="submit" class="btn primary">Save Profile</button>
+  </form>
+</div>
+{% endblock %}
